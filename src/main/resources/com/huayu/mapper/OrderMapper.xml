@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huayu.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.huayu.entity.Order">
+    <constructor>
+      <idArg column="OrderId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="OrderCode" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="OrderDate" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="OrderFlag" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    OrderId, OrderCode, OrderDate, OrderFlag
+  </sql>
+  <select id="selectByExample" parameterType="com.huayu.entity.OrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from biz_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from biz_order
+    where OrderId = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from biz_order
+    where OrderId = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huayu.entity.OrderExample">
+    delete from biz_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huayu.entity.Order">
+    insert into biz_order (OrderId, OrderCode, OrderDate, 
+      OrderFlag)
+    values (#{orderid,jdbcType=INTEGER}, #{ordercode,jdbcType=VARCHAR}, #{orderdate,jdbcType=DATE}, 
+      #{orderflag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huayu.entity.Order">
+    insert into biz_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        OrderId,
+      </if>
+      <if test="ordercode != null">
+        OrderCode,
+      </if>
+      <if test="orderdate != null">
+        OrderDate,
+      </if>
+      <if test="orderflag != null">
+        OrderFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="ordercode != null">
+        #{ordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=DATE},
+      </if>
+      <if test="orderflag != null">
+        #{orderflag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huayu.entity.OrderExample" resultType="java.lang.Long">
+    select count(*) from biz_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update biz_order
+    <set>
+      <if test="row.orderid != null">
+        OrderId = #{row.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="row.ordercode != null">
+        OrderCode = #{row.ordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orderdate != null">
+        OrderDate = #{row.orderdate,jdbcType=DATE},
+      </if>
+      <if test="row.orderflag != null">
+        OrderFlag = #{row.orderflag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update biz_order
+    set OrderId = #{row.orderid,jdbcType=INTEGER},
+      OrderCode = #{row.ordercode,jdbcType=VARCHAR},
+      OrderDate = #{row.orderdate,jdbcType=DATE},
+      OrderFlag = #{row.orderflag,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huayu.entity.Order">
+    update biz_order
+    <set>
+      <if test="ordercode != null">
+        OrderCode = #{ordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null">
+        OrderDate = #{orderdate,jdbcType=DATE},
+      </if>
+      <if test="orderflag != null">
+        OrderFlag = #{orderflag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OrderId = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huayu.entity.Order">
+    update biz_order
+    set OrderCode = #{ordercode,jdbcType=VARCHAR},
+      OrderDate = #{orderdate,jdbcType=DATE},
+      OrderFlag = #{orderflag,jdbcType=VARCHAR}
+    where OrderId = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>

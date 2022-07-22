@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huayu.mapper.AssembleMapper">
+  <resultMap id="BaseResultMap" type="com.huayu.entity.Assemble">
+    <constructor>
+      <idArg column="AssembleId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="PartsId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ProductId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="PartsCount" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    AssembleId, PartsId, ProductId, PartsCount
+  </sql>
+  <select id="selectByExample" parameterType="com.huayu.entity.AssembleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from biz_assemble
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from biz_assemble
+    where AssembleId = #{assembleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from biz_assemble
+    where AssembleId = #{assembleid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huayu.entity.AssembleExample">
+    delete from biz_assemble
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huayu.entity.Assemble">
+    insert into biz_assemble (AssembleId, PartsId, ProductId, 
+      PartsCount)
+    values (#{assembleid,jdbcType=INTEGER}, #{partsid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, 
+      #{partscount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huayu.entity.Assemble">
+    insert into biz_assemble
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assembleid != null">
+        AssembleId,
+      </if>
+      <if test="partsid != null">
+        PartsId,
+      </if>
+      <if test="productid != null">
+        ProductId,
+      </if>
+      <if test="partscount != null">
+        PartsCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assembleid != null">
+        #{assembleid,jdbcType=INTEGER},
+      </if>
+      <if test="partsid != null">
+        #{partsid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="partscount != null">
+        #{partscount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huayu.entity.AssembleExample" resultType="java.lang.Long">
+    select count(*) from biz_assemble
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update biz_assemble
+    <set>
+      <if test="row.assembleid != null">
+        AssembleId = #{row.assembleid,jdbcType=INTEGER},
+      </if>
+      <if test="row.partsid != null">
+        PartsId = #{row.partsid,jdbcType=INTEGER},
+      </if>
+      <if test="row.productid != null">
+        ProductId = #{row.productid,jdbcType=INTEGER},
+      </if>
+      <if test="row.partscount != null">
+        PartsCount = #{row.partscount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update biz_assemble
+    set AssembleId = #{row.assembleid,jdbcType=INTEGER},
+      PartsId = #{row.partsid,jdbcType=INTEGER},
+      ProductId = #{row.productid,jdbcType=INTEGER},
+      PartsCount = #{row.partscount,jdbcType=INTEGER}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huayu.entity.Assemble">
+    update biz_assemble
+    <set>
+      <if test="partsid != null">
+        PartsId = #{partsid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        ProductId = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="partscount != null">
+        PartsCount = #{partscount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where AssembleId = #{assembleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huayu.entity.Assemble">
+    update biz_assemble
+    set PartsId = #{partsid,jdbcType=INTEGER},
+      ProductId = #{productid,jdbcType=INTEGER},
+      PartsCount = #{partscount,jdbcType=INTEGER}
+    where AssembleId = #{assembleid,jdbcType=INTEGER}
+  </update>
+</mapper>

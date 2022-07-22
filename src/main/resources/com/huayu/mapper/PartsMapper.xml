@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huayu.mapper.PartsMapper">
+  <resultMap id="BaseResultMap" type="com.huayu.entity.Parts">
+    <constructor>
+      <idArg column="PartsId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="PartsName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PartsModel" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PartsLoc" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PartsProDate" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="PartsRemark" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PartsId, PartsName, PartsModel, PartsLoc, PartsProDate, PartsRemark
+  </sql>
+  <select id="selectByExample" parameterType="com.huayu.entity.PartsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from biz_parts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from biz_parts
+    where PartsId = #{partsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from biz_parts
+    where PartsId = #{partsid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huayu.entity.PartsExample">
+    delete from biz_parts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huayu.entity.Parts">
+    insert into biz_parts (PartsId, PartsName, PartsModel, 
+      PartsLoc, PartsProDate, PartsRemark
+      )
+    values (#{partsid,jdbcType=INTEGER}, #{partsname,jdbcType=VARCHAR}, #{partsmodel,jdbcType=VARCHAR}, 
+      #{partsloc,jdbcType=VARCHAR}, #{partsprodate,jdbcType=DATE}, #{partsremark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huayu.entity.Parts">
+    insert into biz_parts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="partsid != null">
+        PartsId,
+      </if>
+      <if test="partsname != null">
+        PartsName,
+      </if>
+      <if test="partsmodel != null">
+        PartsModel,
+      </if>
+      <if test="partsloc != null">
+        PartsLoc,
+      </if>
+      <if test="partsprodate != null">
+        PartsProDate,
+      </if>
+      <if test="partsremark != null">
+        PartsRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="partsid != null">
+        #{partsid,jdbcType=INTEGER},
+      </if>
+      <if test="partsname != null">
+        #{partsname,jdbcType=VARCHAR},
+      </if>
+      <if test="partsmodel != null">
+        #{partsmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="partsloc != null">
+        #{partsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="partsprodate != null">
+        #{partsprodate,jdbcType=DATE},
+      </if>
+      <if test="partsremark != null">
+        #{partsremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huayu.entity.PartsExample" resultType="java.lang.Long">
+    select count(*) from biz_parts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update biz_parts
+    <set>
+      <if test="row.partsid != null">
+        PartsId = #{row.partsid,jdbcType=INTEGER},
+      </if>
+      <if test="row.partsname != null">
+        PartsName = #{row.partsname,jdbcType=VARCHAR},
+      </if>
+      <if test="row.partsmodel != null">
+        PartsModel = #{row.partsmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="row.partsloc != null">
+        PartsLoc = #{row.partsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="row.partsprodate != null">
+        PartsProDate = #{row.partsprodate,jdbcType=DATE},
+      </if>
+      <if test="row.partsremark != null">
+        PartsRemark = #{row.partsremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update biz_parts
+    set PartsId = #{row.partsid,jdbcType=INTEGER},
+      PartsName = #{row.partsname,jdbcType=VARCHAR},
+      PartsModel = #{row.partsmodel,jdbcType=VARCHAR},
+      PartsLoc = #{row.partsloc,jdbcType=VARCHAR},
+      PartsProDate = #{row.partsprodate,jdbcType=DATE},
+      PartsRemark = #{row.partsremark,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huayu.entity.Parts">
+    update biz_parts
+    <set>
+      <if test="partsname != null">
+        PartsName = #{partsname,jdbcType=VARCHAR},
+      </if>
+      <if test="partsmodel != null">
+        PartsModel = #{partsmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="partsloc != null">
+        PartsLoc = #{partsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="partsprodate != null">
+        PartsProDate = #{partsprodate,jdbcType=DATE},
+      </if>
+      <if test="partsremark != null">
+        PartsRemark = #{partsremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PartsId = #{partsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huayu.entity.Parts">
+    update biz_parts
+    set PartsName = #{partsname,jdbcType=VARCHAR},
+      PartsModel = #{partsmodel,jdbcType=VARCHAR},
+      PartsLoc = #{partsloc,jdbcType=VARCHAR},
+      PartsProDate = #{partsprodate,jdbcType=DATE},
+      PartsRemark = #{partsremark,jdbcType=VARCHAR}
+    where PartsId = #{partsid,jdbcType=INTEGER}
+  </update>
+</mapper>
