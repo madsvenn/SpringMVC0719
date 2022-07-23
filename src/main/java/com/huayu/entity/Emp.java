@@ -1,6 +1,7 @@
 package com.huayu.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Data
@@ -13,6 +14,7 @@ public class Emp {
 
     private Integer deptno;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date hiredate;
 
     public Emp(Integer id, String name, String sex, Integer deptno, Date hiredate) {

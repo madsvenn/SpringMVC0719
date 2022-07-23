@@ -29,7 +29,11 @@ public class UserTest {
     }
     @Test
     public void select_test1(){
-        List<Parts> list = dao.selectByKey("器件");
-        list.forEach(System.out::println);
+        List<Parts> list = dao.selectAll();
+        list.forEach(x->{
+            if(x.getPartsprodate()!=null){
+                System.out.println(x.getPartsprodate());
+            }
+        });
     }
 }

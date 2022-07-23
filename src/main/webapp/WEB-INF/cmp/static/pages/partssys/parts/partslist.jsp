@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,7 @@
        	<form id="form-search" name="form-search" action="/parts/partsSearch.do" method="post">
         <tr>
             <th align="right">配件名称：</th>
-            <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" /></td>
+            <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" value="${textfield2}"/></td>
 
             <th align="right">
 				<input type="submit" class="btnShort" value="检索" />
@@ -32,7 +33,7 @@
 
     <!--//commonTableSearch-->
     
-	<input type="button" class="btnNormal" value="新增配件" onclick="location.href='${pageContext.request.contextPath }/page/partssys/parts/partsadd.jsp'"/>	
+	<input type="button" class="btnNormal" value="新增配件" onclick="location.href='/cmp/static/pages/partssys/parts/partsadd'"/>
 
 	<br>
 
@@ -52,12 +53,12 @@
             <td align="center">${p.partsid}</td>
             <td align="center">${p.partsname}</td>
             <td align="center">${p.partsloc}</td>
-            <td align="center">${p.partsprodate}</td>
+            <td align="center"><fmt:formatDate value="${p.partsprodate}" pattern="yyyy-MM-dd"/></td>
 			<td align="center">${p.partsremark}</td>
             <td align="center">
             	
-            	<a href="system-order-create-edit.html" class="btnIconEdit" title="更新"></a>
-                <a href="#" class="btnIconDel" title="删除"></a>
+            	<a href="/parts/partsEdit.do?partsid=${p.partsid}" class="btnIconEdit" title="更新"></a>
+                <a href="/parts/partsDelete.do?partsid=${p.partsid}" class="btnIconDel" title="删除"></a>
             </td>
         </tr>
         </c:forEach>

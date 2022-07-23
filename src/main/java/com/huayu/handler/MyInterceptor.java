@@ -23,7 +23,7 @@ public class MyInterceptor implements HandlerInterceptor {
         Long start = System.currentTimeMillis();
         System.out.println("start_time: "+start);
         request.setAttribute("start_interceptor",start);
-        return false;
+        return true;
     }
 
     /**

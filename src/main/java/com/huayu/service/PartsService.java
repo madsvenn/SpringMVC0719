@@ -6,6 +6,7 @@ import com.huayu.mapper.PartsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,4 +30,16 @@ public class PartsService {
         return dao.selectByExample(example);
     }
 
+    public Parts selectById(Integer id){
+
+        return dao.selectByPrimaryKey(id);
+    }
+
+    public void updateByPojo(Parts parts){
+        dao.updateByPrimaryKey(parts);
+    }
+
+    public void deleteById(Integer id){
+        dao.deleteByPrimaryKey(id);
+    }
 }
