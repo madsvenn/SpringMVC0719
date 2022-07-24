@@ -1,26 +1,27 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="gbk" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>Îï×Ê²É¹ºÓë²úÆ·ÕûºÏ¹ÜÀíÏµÍ³</title>
-<link href="../../../css/main.css" rel="stylesheet" type="text/css" media="all" />
+<title>ç‰©èµ„é‡‡è´­ä¸äº§å“æ•´åˆç®¡ç†ç³»ç»Ÿ</title>
+<link href="/css/main.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" language="javascript">
 function showMaterials(){
 	var date = new Date();
 	var time = date.getTime();
 	var obj = new Array('INSERT');
-	//Ê±¼ä´Á
-	var url = "getmater.html";
+	//æ—¶é—´æˆ³
+	var url = "/cmp/static/pages/ordersys/order/getmater";
 	var resultValue = window.showModalDialog(url,obj,'dialogWidth:800px;dialogHeight:400px');
 
-	//»ñÈ¡ÒÑ¾­´æÔÚÃ÷Ï¸ÖĞµÄÔ­ÁÏID¼¯ºÏ
+	//è·å–å·²ç»å­˜åœ¨æ˜ç»†ä¸­çš„åŸæ–™IDé›†åˆ
 	var materIds = document.getElementsByName('materId');
 	if(resultValue!=null && resultValue!=undefined){
 		for(var i=0;i<resultValue.length;i++){
 			var tempAry = resultValue[i].split(',');
 			var flag = false;
-			//ÅĞ¶ÏÁĞ±íÖĞÊÇ·ñÒÑ¾­Ñ¡ÔñÁËÄ³ÖÖÔ­ÁÏ
+			//åˆ¤æ–­åˆ—è¡¨ä¸­æ˜¯å¦å·²ç»é€‰æ‹©äº†æŸç§åŸæ–™
 			for(var j=0;j<materIds.length;j++){
 				if(tempAry[0]==materIds[j].value){
 					flag = true;
@@ -37,11 +38,11 @@ function showMaterials(){
 
 
 function insertMaterialMsg(tempAry){
-	//Ô­ÁÏÃûID
+	//åŸæ–™åID
 	var id = tempAry[0];
-	//Ô­ÁÏÃû³Æ
+	//åŸæ–™åç§°
 	var materName = tempAry[1];
-	//Ô­ÁÏ¿â´æ
+	//åŸæ–™åº“å­˜
 	var storage = tempAry[2];
 	
 	var trObj = attachmentList.insertRow();
@@ -60,14 +61,14 @@ function insertMaterialMsg(tempAry){
 	
 	var tdObj = trObj.insertCell();
 	tdObj.setAttribute("align","left");
-	tdObj.innerHTML = "<button onclick=\"deleteRow('attachmentList',this);\" class=\"btnIconDel\" title=\"É¾³ı\"></button>";
+	tdObj.innerHTML = "<button onclick=\"deleteRow('attachmentList',this);\" class=\"btnIconDel\" title=\"åˆ é™¤\" value=\"åˆ é™¤\"></button>";
 }
 
 
-//É¾³ıĞĞ
+//åˆ é™¤è¡Œ
 function deleteRow(tableID,t){
 	var tIndex = t.parentNode.parentNode.rowIndex;
-		if(confirm('È·¶¨ÒªÖ´ĞĞ´Ë²Ù×÷Âğ?')) {
+		if(confirm('ç¡®å®šè¦æ‰§è¡Œæ­¤æ“ä½œå—?')) {
 			 t.parentNode.parentNode.parentNode.deleteRow(tIndex);
 		}
 		return false; 		
@@ -80,37 +81,34 @@ function deleteRow(tableID,t){
 <body class="content-pages-body">
 <div class="content-pages-wrap">
     <div class="commonTitle">
-        <h2>&gt;&gt; ¶©µ¥ĞÅÏ¢ĞŞ¸Ä</h2>
+        <h2>&gt;&gt; è®¢å•ä¿¡æ¯ä¿®æ”¹</h2>
   </div>
         <form id="coursesCreat" name="coursesCreat" action="" method="post">
 		  <table border="0" cellspacing="1" cellpadding="0" class="commonTable">
 			  <tr>
-				<td width="10%" align="right" class="title"><span class="required">*</span>¶©µ¥ĞòºÅ£º</td>
-				<td width="15%" align="left">1</td>
-				<td width="10%" align="right" class="title"><span class="required">*</span>¶©µ¥±àÂë£º</td>
-				<td width="15%" align="left">DD2011103001</td>
-				<td width="10%" align="right" class="title"><span class="required">*</span>¶©µ¥±£´æÈÕÆÚ£º</td>
+				<td width="10%" align="right" class="title"><span class="required">*</span>è®¢å•ç¼–ç ï¼š</td>
+				<td width="15%" align="left"><input type="text" style="width:150px"></td>
+				<td width="10%" align="right" class="title"><span class="required">*</span>è®¢å•ä¿å­˜æ—¥æœŸï¼š</td>
 				<td width="15%" align="left">2011-10-30</td>
-				<td width="10%" align="right" class="title"><span class="required">*</span>¶©µ¥×´Ì¬£º</td>
+				<td width="10%" align="right" class="title"><span class="required">*</span>è®¢å•çŠ¶æ€ï¼š</td>
 				<td width="15%" align="left">
 					<select id="orderstatus">
-						<option value="0" selected>Î´Ìá½»</option>
-						<option value="1">´ıÉóºË</option>
-						<option value="2">ÒÑÌá½»</option>
+						<option value="0" selected>æœªæäº¤</option>
+						<option value="1">å¾…å®¡æ ¸</option>
 					</select>
 				</td>
 			  </tr>
 
 		 </table>
 	    <div align="left" style="margin-top:15px;margin-bottom:5px">
-	    	<a href="javascript:showMaterials();" title="Ñ¡ÔñÔ­ÁÏ" class="btnShort">Ñ¡ÔñÅä¼ş</a>
+	    	<a href="javascript:showMaterials();" title="é€‰æ‹©åŸæ–™" class="btnShort">é€‰æ‹©é…ä»¶</a>
 	    </div>
 		<table width="90%" border="0" cellpadding="0" cellspacing="1" id="attachmentList" class="commonTable marginTopM">
 		  <tr>
-	          <th>Åä¼şÃû³Æ</th>
-	          <th>½ø»õÊıÁ¿</th>
-			  <th>¿â´æÊıÁ¿</th>
-	          <th class="editColXS">²Ù×÷</th>
+	          <th>é…ä»¶åç§°</th>
+	          <th>è¿›è´§æ•°é‡</th>
+			  <th>åº“å­˜æ•°é‡</th>
+	          <th class="editColXS">æ“ä½œ</th>
 	      </tr>
 		</table>
 		</form>
@@ -118,9 +116,9 @@ function deleteRow(tableID,t){
     <!--//commonTable-->
     <div id="formPageButton">
     	<ul>
-			<li><a href="#" title="±£´æ" class="btnShort">±£´æ</a></li>
-			<li><a href="#" title="Ìá½»" class="btnShort">Ìá½»</a></li>
-        	<li><a href="javascript:window.history.go(-1)" title="·µ»Ø" class="btnShort">·µ»Ø</a></li>
+			<li><a href="#" title="ä¿å­˜" class="btnShort">ä¿å­˜</a></li>
+			<li><a href="#" title="æäº¤" class="btnShort">æäº¤</a></li>
+        	<li><a href="javascript:window.history.go(-1)" title="è¿”å›" class="btnShort">è¿”å›</a></li>
         </ul>
     </div>
     <!--//commonToolBar-->
@@ -128,4 +126,3 @@ function deleteRow(tableID,t){
 <!--//content pages wrap-->
 </body>
 </html>
-

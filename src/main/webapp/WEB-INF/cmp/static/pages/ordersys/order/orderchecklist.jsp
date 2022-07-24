@@ -1,37 +1,37 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="gbk" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>Îï×Ê²É¹ºÓë²úÆ·ÕûºÏ¹ÜÀíÏµÍ³</title>
-<link href="../../../css/main.css" rel="stylesheet" type="text/css" media="all" />
-<script src="../../../js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<title>ç‰©èµ„é‡‡è´­ä¸Žäº§å“æ•´åˆç®¡ç†ç³»ç»Ÿ</title>
+<link href="/css/main.css" rel="stylesheet" type="text/css" media="all" />
+<script src="/js/jquery-1.4.2.min.js" type="text/javascript"></script>
 </head>
 
 <body class="content-pages-body">
 <div class="content-pages-wrap">
 	<div class="commonTitle">
-	  <h2>&gt;&gt; ¶©µ¥¹ÜÀí</h2>
+	  <h2>&gt;&gt; è®¢å•ç®¡ç†</h2>
 	</div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="commonTableSearch">
        	<form id="form-search" name="form-search" action="" method="post">
         <tr>
-            <th align="right">¶©µ¥±àÂë£º</th>
+            <th align="right">è®¢å•ç¼–ç ï¼š</th>
             <td><input name="textfield" type="text" class="inputTextNormal" id="textfield1" /></td>
-            <th align="right">¶©µ¥±£´æÊ±¼ä£º</th>
+            <th align="right">è®¢å•ä¿å­˜æ—¶é—´ï¼š</th>
             <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" /></td>
-            <td align="right">¶©µ¥×´Ì¬£º</td>
+            <td align="right">è®¢å•çŠ¶æ€ï¼š</td>
             <td>
             		<select id="orderstatus">
-						<option value="" selected>ÇëÑ¡Ôñ</option>
-						<option value="1">´ýÉóºË</option>
-						<option value="2">ÉóºËÍ¨¹ý</option>
-						<option value="3">ÉóºË²»Í¨¹ý</option>
+						<option value="" selected>è¯·é€‰æ‹©</option>
+						<option value="1">å¾…å®¡æ ¸</option>
+						<option value="2">å®¡æ ¸é€šè¿‡</option>
+						<option value="3">å®¡æ ¸ä¸é€šè¿‡</option>
 					</select></td>
 
             <th align="right">
-				<input type="button" class="btnShort" value="¼ìË÷" />
+				<input type="button" class="btnShort" value="æ£€ç´¢" />
 			</th>
         </tr>
         <tr>
@@ -46,17 +46,17 @@
 
     <table width="101%" border="0" cellpadding="0" cellspacing="1" class="commonTable">
         <tr>
-            <th>ÐòºÅ</th>
-            <th>¶©µ¥±àÂë</th>
-            <th>¶©µ¥±£´æÊ±¼ä</th>
-            <th>¶©µ¥×´Ì¬</th>
-            <th class="editColDefault">²Ù×÷</th>
+            <th>åºå·</th>
+            <th>è®¢å•ç¼–ç </th>
+            <th>è®¢å•ä¿å­˜æ—¶é—´</th>
+            <th>è®¢å•çŠ¶æ€</th>
+            <th class="editColDefault">æ“ä½œ</th>
         </tr>
         <tr>
             <td align="center">1</td>
             <td align="center">DD2011103001</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="RED">ÒÑÍ¨¹ý</font></td>
+			<td align="center"><font color="RED">å·²é€šè¿‡</font></td>
             <td align="center">
             	
             </td>
@@ -65,7 +65,7 @@
             <td align="center">2</td>
             <td align="center">DD2011103002</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="RED">ÒÑÍ¨¹ý</font></td>
+			<td align="center"><font color="RED">å·²é€šè¿‡</font></td>
             <td align="center">
             	
             </td>
@@ -74,20 +74,20 @@
             <td align="center">3</td>
             <td align="center">DD2011103003</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="BLUE">´ýÉóºË</font></td>
+			<td align="center"><font color="BLUE">å¾…å®¡æ ¸</font></td>
             <td align="center">
-            	<a href="#" ><font color="BLUE">Í¨¹ý</font></a>
-            	<a href="#" ><font color="BLUE">²»Í¨¹ý</font></a>
+            	<a href="#" ><font color="BLUE">é€šè¿‡</font></a>
+            	<a href="#" ><font color="BLUE">ä¸é€šè¿‡</font></a>
             </td>
         </tr>
         <tr>
             <td align="center">4</td>
             <td align="center">DD2011103004</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="BLUE">´ýÉóºË</font></td>
+			<td align="center"><font color="BLUE">å¾…å®¡æ ¸</font></td>
             <td align="center">
-            	<a href="#" ><font color="BLUE">Í¨¹ý</font></a>
-            	<a href="#" ><font color="BLUE">²»Í¨¹ý</font></a>
+            	<a href="#" ><font color="BLUE">é€šè¿‡</font></a>
+            	<a href="#" ><font color="BLUE">ä¸é€šè¿‡</font></a>
             </td>
         </tr>
 
@@ -95,74 +95,74 @@
             <td align="center">5</td>
             <td align="center">DD2011103005</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="BLUE">´ýÉóºË</font></td>
+			<td align="center"><font color="BLUE">å¾…å®¡æ ¸</font></td>
             <td align="center">
-            	<a href="#" ><font color="BLUE">Í¨¹ý</font></a>
-            	<a href="#" ><font color="BLUE">²»Í¨¹ý</font></a>
+            	<a href="#" ><font color="BLUE">é€šè¿‡</font></a>
+            	<a href="#" ><font color="BLUE">ä¸é€šè¿‡</font></a>
             </td>
         </tr>
         <tr>
             <td align="center">6</td>
             <td align="center">DD2011103006</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="BLUE">´ýÉóºË</font></td>
+			<td align="center"><font color="BLUE">å¾…å®¡æ ¸</font></td>
             <td align="center">
-            	<a href="#" ><font color="BLUE">Í¨¹ý</font></a>
-            	<a href="#" ><font color="BLUE">²»Í¨¹ý</font></a>
+            	<a href="#" ><font color="BLUE">é€šè¿‡</font></a>
+            	<a href="#" ><font color="BLUE">ä¸é€šè¿‡</font></a>
             </td>
         </tr>
         <tr>
             <td align="center">7</td>
             <td align="center">DD2011103007</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="BLUE">´ýÉóºË</font></td>
+			<td align="center"><font color="BLUE">å¾…å®¡æ ¸</font></td>
             <td align="center">
-            	<a href="#" ><font color="BLUE">Í¨¹ý</font></a>
-            	<a href="#" ><font color="BLUE">²»Í¨¹ý</font></a>
+            	<a href="#" ><font color="BLUE">é€šè¿‡</font></a>
+            	<a href="#" ><font color="BLUE">ä¸é€šè¿‡</font></a>
             </td>
         </tr>
         <tr>
             <td align="center">8</td>
             <td align="center">DD2011103008</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="BLUE">´ýÉóºË</font></td>
+			<td align="center"><font color="BLUE">å¾…å®¡æ ¸</font></td>
             <td align="center">
-            	<a href="#" ><font color="BLUE">Í¨¹ý</font></a>
-            	<a href="#" ><font color="BLUE">²»Í¨¹ý</font></a>
+            	<a href="#" ><font color="BLUE">é€šè¿‡</font></a>
+            	<a href="#" ><font color="BLUE">ä¸é€šè¿‡</font></a>
             </td>
         </tr>
         <tr>
             <td align="center">9</td>
             <td align="center">DD2011103009</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="BLUE">´ýÉóºË</font></td>
+			<td align="center"><font color="BLUE">å¾…å®¡æ ¸</font></td>
             <td align="center">
-            	<a href="#" ><font color="BLUE">Í¨¹ý</font></a>
-            	<a href="#" ><font color="BLUE">²»Í¨¹ý</font></a>
+            	<a href="#" ><font color="BLUE">é€šè¿‡</font></a>
+            	<a href="#" ><font color="BLUE">ä¸é€šè¿‡</font></a>
             </td>
         </tr>
         <tr>
             <td align="center">10</td>
             <td align="center">DD2011103010</td>
             <td align="center">2011-10-30</td>
-			<td align="center"><font color="BLUE">´ýÉóºË</font></td>
+			<td align="center"><font color="BLUE">å¾…å®¡æ ¸</font></td>
             <td align="center">
-            	<a href="#" ><font color="BLUE">Í¨¹ý</font></a>
-            	<a href="#" ><font color="BLUE">²»Í¨¹ý</font></a>
+            	<a href="#" ><font color="BLUE">é€šè¿‡</font></a>
+            	<a href="#" ><font color="BLUE">ä¸é€šè¿‡</font></a>
             </td>
         </tr>
   </table>
     <!--//commonTable-->
     <div id="pagelist">
     	<ul class="clearfix">
-        	<li><a href="#">Ê×Ò³</a></li>
-            <li ><a href="#">ÉÏÒ³</a></li>
-            <li><a href="#">ÏÂÒ³</a></li>
+        	<li><a href="#">é¦–é¡µ</a></li>
+            <li ><a href="#">ä¸Šé¡µ</a></li>
+            <li><a href="#">ä¸‹é¡µ</a></li>
             <li class="current"><input type="text" value="1" style="text-align:right" size="1"></li>
-            <li><a href="#">Ìø×ª</a></li>
-            <li><a href="#">Î²Ò³</a></li>
-            <li class="pageinfo">µÚ1Ò³</li>
-            <li class="pageinfo">¹²8Ò³</li>
+            <li><a href="#">è·³è½¬</a></li>
+            <li><a href="#">å°¾é¡µ</a></li>
+            <li class="pageinfo">ç¬¬1é¡µ</li>
+            <li class="pageinfo">å…±8é¡µ</li>
         </ul>
     </div>
 </div>

@@ -1,12 +1,12 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="gbk" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>Îï×Ê²É¹ºÓë²úÆ·ÕûºÏ¹ÜÀíÏµÍ³</title>
-<link href="../../../css/main.css" rel="stylesheet" type="text/css" media="all" />
-<script src="../../../js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<title>ç‰©èµ„é‡‡è´­ä¸Žäº§å“æ•´åˆç®¡ç†ç³»ç»Ÿ</title>
+<link href="/css/main.css" rel="stylesheet" type="text/css" media="all" />
+<script src="/js/jquery-1.4.2.min.js" type="text/javascript"></script>
 </head>
 <script type="text/javascript">
 
@@ -40,7 +40,7 @@ function catchValues(){
 	}
 
 	if(!flag){
-		alert("ÇëÑ¡ÔñÔ­ÁÏ£¡");
+		alert("è¯·é€‰æ‹©åŽŸæ–™ï¼");
 		return ;
 	}
 	window.returnValue = ary;
@@ -51,15 +51,15 @@ function catchValues(){
 <body class="content-pages-body">
 <div class="content-pages-wrap">
 	<div class="commonTitle">
-	  <h2>&gt;&gt; ¶©µ¥¹ÜÀí&nbsp;&gt;&gt;&nbsp;Åä¼þÑ¡ÔñÁÐ±í</h2>
+	  <h2>&gt;&gt; è®¢å•ç®¡ç†&nbsp;&gt;&gt;&nbsp;é…ä»¶é€‰æ‹©åˆ—è¡¨</h2>
 	</div>
 	<form id="form-search" name="form-search" action="" method="post">
 	    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="commonTableSearch">
 	        <tr>
-	            <th align="right">Åä¼þÃû³Æ£º</th>
+	            <th align="right">é…ä»¶åç§°ï¼š</th>
 	            <td ><input name="textfield" type="text" class="inputTextNormal" id="textfield" /></td>
 				<td width="150" align="" >
-					<button>¼ìË÷</button>
+					<button>æ£€ç´¢</button>
 				</td>
 				<td></td>
 	        </tr>
@@ -68,8 +68,8 @@ function catchValues(){
     <!--//commonTableSearch-->
     <div class="btnBar">
     	<ul class="clearfix">
-        	<li><a href="javascript:catchValues();" title="È·¶¨" class="btnLong">È·¶¨</a></li>
-        	<li><a href="javascript:window.close();" title="¹Ø±Õ" class="btnLong">¹Ø±Õ</a></li>
+        	<li><a href="javascript:catchValues();" title="ç¡®å®š" class="btnLong">ç¡®å®š</a></li>
+        	<li><a href="javascript:window.close();" title="å…³é—­" class="btnLong">å…³é—­</a></li>
         </ul>
     </div>
     <form action="" name="listForm" method="post">
@@ -78,50 +78,50 @@ function catchValues(){
 	            <th>
 	            	<input type="checkbox" name="ids" onclick="checkAll();">
 	            </th>
-	            <th>Åä¼þÃû³Æ</th>
-	            <th>Åä¼þ¿â´æ</th>
+	            <th>é…ä»¶åç§°</th>
+	            <th>é…ä»¶åº“å­˜</th>
 	        </tr>
 
 		        <tr>
 		            <td align="center" style="width:5%">
-		            	<input type="checkbox" checked disabled="disabled" name="id" value="1,ÂËÇåÆ÷,50">
+		            	<input type="checkbox" checked disabled="disabled" name="id" value="1,æ»¤æ¸…å™¨,50">
 		            </td>
-		            <td align="center">ÂËÇåÆ÷</td>
+		            <td align="center">æ»¤æ¸…å™¨</td>
 		            <td align="center">50</td>
 		        </tr>
 		        <tr>
 		            <td align="center" style="width:5%">
-						<input type="checkbox" checked disabled="disabled" name="id" value="2,Á¬¸Ë×Ü³É,100">
+						<input type="checkbox" checked disabled="disabled" name="id" value="2,è¿žæ†æ€»æˆ,100">
 		            </td>
-		            <td align="center">Á¬¸Ë×Ü³É</td>
+		            <td align="center">è¿žæ†æ€»æˆ</td>
 		            <td align="center">100</td>
 		        </tr>
 		        <tr>
 		            <td align="center" style="width:5%">
-						<input type="checkbox" checked disabled="disabled" name="id" value="3,ÖáÍß¼°Á¬¸ËÍß,25">
+						<input type="checkbox" checked disabled="disabled" name="id" value="3,è½´ç“¦åŠè¿žæ†ç“¦,25">
 		            </td>
-		            <td align="center">ÖáÍß¼°Á¬¸ËÍß</td>
+		            <td align="center">è½´ç“¦åŠè¿žæ†ç“¦</td>
 		            <td align="center">25</td>
 		        </tr>
 		        <tr>
 		            <td align="center" style="width:5%">
-		            	<input type="checkbox" name="id" value="4,ÆøÃÅ¼°²¿¼þ,40">
+		            	<input type="checkbox" name="id" value="4,æ°”é—¨åŠéƒ¨ä»¶,40">
 		            </td>
-		            <td align="center">ÆøÃÅ¼°²¿¼þ</td>
+		            <td align="center">æ°”é—¨åŠéƒ¨ä»¶</td>
 		            <td align="center">40</td>
 		        </tr>
 		        <tr>
 		            <td align="center" style="width:5%">
-						<input type="checkbox" name="id" value="5,ÈýÔª´ß»¯Æ÷,30">
+						<input type="checkbox" name="id" value="5,ä¸‰å…ƒå‚¬åŒ–å™¨,30">
 		            </td>
-		            <td align="center">ÈýÔª´ß»¯Æ÷</td>
+		            <td align="center">ä¸‰å…ƒå‚¬åŒ–å™¨</td>
 		            <td align="center">30</td>
 		        </tr>
 		        <tr>
 		            <td align="center" style="width:5%">
-		            	<input type="checkbox" name="id" value="6,È¼ÓÍÅçÉä×°ÖÃ,24">
+		            	<input type="checkbox" name="id" value="6,ç‡ƒæ²¹å–·å°„è£…ç½®,24">
 		            </td>
-		            <td align="center">È¼ÓÍÅçÉä×°ÖÃ</td>
+		            <td align="center">ç‡ƒæ²¹å–·å°„è£…ç½®</td>
 		            <td align="center">24</td>
 		        </tr>
 	  </table>
@@ -129,14 +129,14 @@ function catchValues(){
     <!--//commonTable-->
     <div id="pagelist">
     	<ul class="clearfix">
-        	<li><a href="#">Ê×Ò³</a></li>
-            <li ><a href="#">ÉÏÒ³</a></li>
-            <li><a href="#">ÏÂÒ³</a></li>
+        	<li><a href="#">é¦–é¡µ</a></li>
+            <li ><a href="#">ä¸Šé¡µ</a></li>
+            <li><a href="#">ä¸‹é¡µ</a></li>
             <li class="current"><input type="text" value="1" style="text-align:right" size="1"></li>
-            <li><a href="#">Ìø×ª</a></li>
-            <li><a href="#">Î²Ò³</a></li>
-            <li class="pageinfo">µÚ1Ò³</li>
-            <li class="pageinfo">¹²8Ò³</li>
+            <li><a href="#">è·³è½¬</a></li>
+            <li><a href="#">å°¾é¡µ</a></li>
+            <li class="pageinfo">ç¬¬1é¡µ</li>
+            <li class="pageinfo">å…±8é¡µ</li>
         </ul>
     </div>
 </div>

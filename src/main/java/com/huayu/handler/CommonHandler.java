@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CommonHandler {
 
+
     @RequestMapping("/cmp/{path}")
     public String cmp(@PathVariable("path")String path){
         return path;
