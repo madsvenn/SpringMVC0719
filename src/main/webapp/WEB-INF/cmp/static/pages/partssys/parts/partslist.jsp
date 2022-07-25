@@ -18,7 +18,8 @@
 	  <h2>&gt;&gt; 配件管理</h2>
 	</div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="commonTableSearch">
-       	<form id="form-search" name="form-search" action="/parts/partsSearch.do" method="post">
+       	<form id="form-search" name="form-search" action="/parts/partsList.do" method="post">
+            <input name="pageNum" id="pageNum" value="1" type="hidden">
         <tr>
             <th align="right">配件名称：</th>
             <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" value="${textfield2}"/></td>
@@ -47,9 +48,9 @@
             <th>备注</th>
             <th class="editColDefault">操作</th>
         </tr>
-        <c:forEach var="p" items="${list}" varStatus="status">
+        <c:forEach var="p" items="${pageInfo.list}" varStatus="status">
         <tr>
-            <td align="center">${status.count}</td>
+            <td align="center">${status.count+(pageInfo.pageNum-1)*pageInfo.pageSize}</td>
             <td align="center">${p.partsid}</td>
             <td align="center">${p.partsname}</td>
             <td align="center">${p.partsloc}</td>
@@ -66,19 +67,11 @@
         
   </table>
     <!--//commonTable-->
-    <div id="pagelist">
-    	<ul class="clearfix">
-        	<li><a href="#">首页</a></li>
-            <li ><a href="#">上页</a></li>
-            <li><a href="#">下页</a></li>
-            <li class="current"><input type="text" value="1" style="text-align:right" size="1"></li>
-            <li><a href="#">跳转</a></li>
-            <li><a href="#">尾页</a></li>
-            <li class="pageinfo">第1页</li>
-            <li class="pageinfo">共8页</li>
-        </ul>
-    </div>
+    <%@ include file="/WEB-INF/cmp/page.jsp" %>
+
+
 </div>
+
 <!--//content pages wrap-->
 </body>
 </html>

@@ -20,7 +20,17 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.0</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>3.2.0</version>
         </dependency>
 
         <dependency>
@@ -41,6 +51,7 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+
 
         <dependency>
             <groupId>org.mybatis</groupId>

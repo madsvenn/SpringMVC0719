@@ -1,6 +1,7 @@
-import com.huayu.entity.Order;
-import com.huayu.entity.Parts;
-import com.huayu.entity.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.huayu.entity.*;
+import com.huayu.mapper.PartsMapper;
 import com.huayu.service.OrderService;
 import com.huayu.service.PartsService;
 import com.huayu.service.UserService;
@@ -36,12 +37,23 @@ public class UserTest {
     }
     @Test
     public void select_test1(){
-        List<Parts> list = dao.selectAll();
-        list.forEach(x->{
-            if(x.getPartsprodate()!=null){
-                System.out.println(x.getPartsprodate());
-            }
-        });
+
+//        PageHelper.startPage(1,10);
+//        List<Parts> list = dao.selectByKey("");
+//        PageInfo<Parts> pageInfo = new PageInfo<>(list);
+//
+//        System.out.println(pageInfo);
+//        System.out.println(pageInfo.getTotal());
+//        System.out.println(pageInfo.getPageNum());
+//        System.out.println(pageInfo.getPageSize());
+//        pageInfo.getList().forEach(System.out::println);
+
+        PageHelper.startPage(1,10);
+        List<Partsrepertory> list = dao.selectRepertory(null);
+        PageInfo<Partsrepertory> pageInfo = new PageInfo<>(list);
+        list.forEach(System.out::println);
+        System.out.println(pageInfo);
+        System.out.println(pageInfo.getTotal());
     }
 
     @Test

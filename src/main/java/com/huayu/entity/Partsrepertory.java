@@ -1,8 +1,13 @@
 package com.huayu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Partsrepertory {
     private Integer partsrepid;
 
@@ -10,15 +15,18 @@ public class Partsrepertory {
 
     private Integer partsreqcount;
 
-    public Partsrepertory(Integer partsrepid, Integer partsid, Integer partsreqcount) {
+    /*
+    数据库中没有的字段
+     */
+    @TableField(exist = false)
+    private String partsname;
+
+    public Partsrepertory(Integer partsrepid,Integer partsid,Integer partsreqcount){
         this.partsrepid = partsrepid;
         this.partsid = partsid;
         this.partsreqcount = partsreqcount;
     }
 
-    public Partsrepertory() {
-        super();
-    }
 
     public Integer getPartsrepid() {
         return partsrepid;

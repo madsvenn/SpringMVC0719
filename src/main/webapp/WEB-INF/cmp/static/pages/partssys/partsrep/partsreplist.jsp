@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,14 +17,15 @@
 	  <h2>&gt;&gt; 配件管理</h2>
 	</div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="commonTableSearch">
-       	<form id="form-search" name="form-search" action="" method="post">
+       	<form id="form-search" name="form-search" action="/parts/partsRepertory.do" method="post">
+            <input name="pageNum" id="pageNum" value="1" type="hidden">
         <tr>
             <th align="right">配件编码：</th>
-            <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" /></td>
+            <td><input name="textfield1" type="text" class="inputTextNormal" value="${textfield1}" id="textfield1" /></td>
              <th align="right">配件名称：</th>
-            <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" /></td>
+            <td><input name="textfield2" type="text" class="inputTextNormal" value="${textfield2}" id="textfield2" /></td>
             <th align="right">
-				<input type="button" class="btnShort" value="检索" />
+				<input type="submit" class="btnShort" value="检索" />
 			</th>
         </tr>
        	</form>
@@ -32,7 +34,7 @@
 
     <!--//commonTableSearch-->
     
-	<input type="button" class="btnNormal" value="配件出入库" onclick="location.href='${pageContext.request.contextPath }/page/partssys/partsrep/partsrep.jsp'"/>	
+	<input type="button" class="btnNormal" value="配件出入库" onclick="location.href='${pageContext.request.contextPath }/cmp/static/pages/partssys/partsrep/partsrep'"/>
 
     <table width="101%" border="0" cellpadding="0" cellspacing="1" class="commonTable">
         <tr>
@@ -41,52 +43,22 @@
             <th>配件名称</th>
             <th>库存数量</th>
         </tr>
-        <tr>
-            <td align="center">1</td>
-            <td align="center">100</td>
-            <td align="center">滤清器</td>
-			<td align="center">30</td>
-        </tr>
-        <tr>
-            <td align="center">2</td>
-            <td align="center">101</td>
-            <td align="center">滤清器</td>
-			<td align="center">330</td>
-        </tr>
-        <tr>
-            <td align="center">3</td>
-            <td align="center">102</td>
-            <td align="center">滤清器</td>
-			<td align="center">67</td>
-        </tr>
-       	<tr>
-            <td align="center">4</td>
-            <td align="center">103</td>
-            <td align="center">滤清器</td>
-			<td align="center">70</td>
-        </tr>
-        <tr>
-            <td align="center">5</td>
-            <td align="center">104</td>
-            <td align="center">滤清器</td>
-			<td align="center">98</td>
-        </tr>
+
+        <c:forEach items="${pageInfo.list}" var="p" varStatus="status">
+            <tr>
+                <td align="center">${status.count+(pageInfo.pageNum-1)*pageInfo.pageSize}</td>
+                <td align="center">${p.partsid}</td>
+                <td align="center">${p.partsname}</td>
+                <td align="center">${p.partsreqcount}</td>
+            </tr>
+        </c:forEach>
+
         
         
   </table>
     <!--//commonTable-->
-    <div id="pagelist">
-    	<ul class="clearfix">
-        	<li><a href="#">首页</a></li>
-            <li ><a href="#">上页</a></li>
-            <li><a href="#">下页</a></li>
-            <li class="current"><input type="text" value="1" style="text-align:right" size="1"></li>
-            <li><a href="#">跳转</a></li>
-            <li><a href="#">尾页</a></li>
-            <li class="pageinfo">第1页</li>
-            <li class="pageinfo">共8页</li>
-        </ul>
-    </div>
+
+    <%@ include file="/WEB-INF/cmp/page.jsp"%>
 </div>
 <!--//content pages wrap-->
 </body>
