@@ -25,4 +25,8 @@ public class UserService {
         return dao.selectUserByPassword(username, password);
     }
 
+    public void updateLoginTime(User user){
+        dao.updateByPrimaryKey(user);
+    }
+
 }

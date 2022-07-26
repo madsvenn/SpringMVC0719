@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -33,6 +34,8 @@ public class UserController {
         User user = service.selectUserByPwd(name, pwd);
         map.put("user",user);
         if(user != null){
+            user.setLogintime(new Date());
+            service.updateLoginTime(user);
             return "index";
         }
         return "redirect:/login";

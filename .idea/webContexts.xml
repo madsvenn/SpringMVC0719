@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/cmp/frame/inc-nav.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/cmp/frame" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/cmp/pages/system/user/useradd.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/cmp/pages/system/user" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/cmp/static/pages/partssys/partsrep/partsrep.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/cmp/static/pages/partssys/partsrep" />
       </map>
     </option>
   </component>

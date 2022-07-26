@@ -121,7 +121,7 @@ a:active  {}
 #header        { background:url(../images/header-bg.jpg) repeat-x 0 0; height:82px; margin:0 auto; position:relative; text-align:center;}
 .logo-title,
 .logout        { position:absolute;}
-.logo-title    { background:url(../images/header-logo-title.jpg) no-repeat 0 0; height:82px; left:0; top:0; width:750px;}
+.logo-title    { background:url(../images/header-logo-title.gif) no-repeat 0 0; height:120px; left:0; top:0; width:750px;}
 .logo-title h1 { display:none;}
 .logout        { display:table; height:20px; line-height:20px; right:10px; top:10px; width:auto;}
 .user-icon     { background:url(../images/user-male.gif) no-repeat 60px 2px;}

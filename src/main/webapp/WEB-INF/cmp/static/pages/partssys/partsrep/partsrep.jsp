@@ -1,4 +1,10 @@
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% Date date = new Date();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +16,7 @@
 	<script type="text/javascript">
 		$(function () {
 
-			$.getJSON("/code/gainParts.do",{code:$(this).val()},function (a){
+			$.getJSON("/code/gainParts.do",{},function (a){
 				var id = 0;
 				for(var i =0;i<a.length;i++){
 					var option1 = $("<option>");
@@ -22,7 +28,7 @@
 			})
 
 			$("#partsid").change(function (){
-				$.getJSON("/code/gainParts.do",{code:$(this).val()},function (a){
+				$.getJSON("/code/gainParts.do",{},function (a){
 					var id = 0;
 					for(var i =0;i<a.length;i++){
 						if($("#partsid").val()==a[i].partsid){
@@ -76,10 +82,11 @@
 						<option>请选择</option>
 					</select>
 				</td>
+
 				<td width="10%" align="right" class="title"><span class="required">*</span>出/入库日期：</td>
-				<td width="15%" align="left"><input name="billtime" id="billtime" value="2011-10-30"></td>
+				<td width="15%" align="left"><fmt:formatDate value="<%=date%>" pattern="yyyy-MM-dd"/><input type="hidden" name="billtime" id="billtime" value="<fmt:formatDate value="<%=date%>" pattern="yyyy-MM-dd"/>" disabled></td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>操作员：</td>
-				<td width="15%" align="left"><input name="billuser" id="billuser" value="1"></td>
+				<td width="15%" align="left">${user.loginname}<input type="hidden" name="billuser" id="billuser" value="${user.userid}"></td>
 			  </tr>
 			  <tr>
 				<td width="10%" align="right" class="title"><span class="required">*</span>配件：</td>

@@ -35,35 +35,27 @@ public class CodeHandler {
 
     @RequestMapping("/getCode.do")
     @ResponseBody
-    public void CodeSelect(HttpServletResponse response,
-                             @RequestParam("code") String code) throws IOException {
+    public List<Code> CodeSelect(@RequestParam("code") String code){
 
         List<Code> list = service.selectByCode(code);
-        ObjectMapper mapper = new ObjectMapper();
-        String str = mapper.writeValueAsString(list);
-        response.setContentType("text/json;charset=UTF-8");
-        response.getWriter().println(str);
-
+        return list;
     }
 
     @RequestMapping("/gainParts.do")
     @ResponseBody
-    public void GainParts(HttpServletResponse response) throws IOException {
+    public List<Partsrepertory> GainParts(){
 
         List<Partsrepertory> list = Pservice.selectRepertory(null);
         PartsExample example = new PartsExample();
         List<Parts> parts = dao.selectByExample(example);
 
-        list = list.stream().map(x->{
+        return list.stream().map(x->{
             for(Parts y:parts){
                 if (x.getPartsid()==y.getPartsid()){
                     x.setPartsname(y.getPartsname());
                 }
             }return x;
         }).collect(Collectors.toList());
-        ObjectMapper mapper = new ObjectMapper();
-        String str = mapper.writeValueAsString(list);
-        response.setContentType("text/json;charset=UTF-8");
-        response.getWriter().println(str);
+
     }
 }
