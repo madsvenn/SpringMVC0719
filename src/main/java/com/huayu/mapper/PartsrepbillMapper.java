@@ -29,4 +29,6 @@ public interface PartsrepbillMapper {
     int updateByPrimaryKeySelective(Partsrepbill row);
 
     int updateByPrimaryKey(Partsrepbill row);
+
+    List<Partsrepbill> selectBypartsname(Partsrepbill partsrepbill);
 }

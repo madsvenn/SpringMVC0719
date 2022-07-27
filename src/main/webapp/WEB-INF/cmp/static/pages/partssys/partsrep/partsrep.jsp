@@ -23,7 +23,7 @@
 					option1.append(a[i].partsname);
 					option1.val(a[i].partsid);
 					$("#partsid").append(option1);
-					$("#billcount").val(a[i].partsreqcount);
+
 				}
 			})
 
@@ -32,9 +32,13 @@
 					var id = 0;
 					for(var i =0;i<a.length;i++){
 						if($("#partsid").val()==a[i].partsid){
-							$("#billcount").val(a[i].partsreqcount);
 							$("#countFlag").val(a[i].partsreqcount);
+							document.getElementById("count").innerText=a[i].partsreqcount;
 						}
+					}
+					console.log($("#partsid").val())
+					if($("#partsid").val()===""){
+						$("#count").empty();
 					}
 				})
 			})
@@ -93,7 +97,7 @@
 				<td width="15%" align="left">
 					<select id="partsid" name="partsid" style="width:150px;">
 						<option value="">请选择</option>
-					</select>
+					</select><p id="count"></p>
 				</td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>出/入库数量：</td>
 				<td width="15%" align="left">
@@ -117,10 +121,14 @@
 		if($("#billflag").val()=="out"){
 			if(Number($("#billcount").val()) > Number($("#countFlag").val())){
 				alert("出库失败，库存不足")
-				alert($("#billcount").val()+'%'+$("#countFlag").val())
+				return;
 			}
 			$("#coursesCreat").submit();
-		}else{
+		}else if($("#billflag").val()===""){
+			alert("未选择出入库类型")
+			return;
+		}
+		else{
 			$("#coursesCreat").submit();
 		}
 	}

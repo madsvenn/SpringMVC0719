@@ -2,6 +2,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.huayu.entity.*;
 import com.huayu.mapper.PartsMapper;
+import com.huayu.service.BillService;
 import com.huayu.service.OrderService;
 import com.huayu.service.PartsService;
 import com.huayu.service.UserService;
@@ -21,6 +22,7 @@ public class UserTest {
     OrderService orderService;
     UserService service;
     PartsService dao;
+    BillService billService;
 
     @Before
     public void init(){
@@ -28,11 +30,40 @@ public class UserTest {
         service = context.getBean(UserService.class);
         dao = context.getBean(PartsService.class);
         orderService = context.getBean(OrderService.class);
+        billService = context.getBean(BillService.class);
     }
 
     @Test
     public void select_test(){
-        List<User> list = service.selectAll();
+
+//        List<Partsrepbill> list = billService.select_bill(Partsrepbill.builder()
+//                .codename("")
+//                .partsname("")
+//                .typename("")
+//                .build());
+//        list.forEach(System.out::println);
+
+//        String code = "入库";
+//        System.out.println(code.length());
+        String codename = "入库";
+        String partsname = "滤清器件";
+        String typename = "采购入库";
+        String billtime = "2018-04-04";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(billtime);
+        } catch (ParseException e) {
+            System.out.println("转失败");
+        }
+        System.out.println(date);
+        List<Partsrepbill> list = null;
+        list = billService.select_bill(Partsrepbill.builder()
+                .codename(codename)
+                .partsname(partsname)
+                .typename(typename)
+                .billtime(date)
+                .build());
         list.forEach(System.out::println);
     }
     @Test

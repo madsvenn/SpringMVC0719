@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +9,89 @@
 <title>物资采购与产品整合管理系统</title>
 <link href="${pageContext.request.contextPath }/css/main.css" rel="stylesheet" type="text/css" media="all" />
 <script src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function (){
 
+        $.getJSON("/code/getCode.do",{code:'io'},function (a){
+
+            for(var i =0;i<a.length;i++){
+                if(a[i].name==='${codename}'){
+
+                    var option1 = $("<option selected>");
+                    option1.append(a[i].name);
+                    option1.val(a[i].name);
+                    $("#codename").append(option1);
+
+
+                }else {
+                    var option1 = $("<option>");
+                    option1.append(a[i].name);
+                    option1.val(a[i].name);
+                    $("#codename").append(option1);
+                }
+            }
+
+            if($("#codename").val() != ""){
+                $.getJSON("/code/getCodeByName.do",{codename:'${codename}'},function (a){
+                    // alert(a[0].code)
+                    $("#typename").empty()
+                    var id = 0;
+                    for(var i=0;i<a.length;i++){
+
+                        if(a[i].name==='${typename}'){
+                            var option1 = $("<option selected>");
+                            option1.append(a[i].name);
+                            option1.val(a[i].name)
+                            $("#typename").append(option1);
+                        }else {
+                            var option1 = $("<option>");
+                            option1.append(a[i].name);
+                            option1.val(a[i].name)
+                            $("#typename").append(option1);
+                        }
+                    }
+                    if('${typename}'===''){
+
+                        var option1 = $("<option selected>");
+                        option1.append("请选择");
+                        option1.val("");
+                        $("#typename").append(option1);
+                    }
+                })
+            }
+
+        })
+
+
+        $("#codename").change(function (){
+            if($("#codename").val() != ""){
+                $.getJSON("/code/getCodeByName.do",{codename:$(this).val()},function (a){
+                    // alert(a[0].code)
+                    $("#typename").empty();
+                    var id = 0;
+                    for(var i=0;i<a.length;i++){
+
+                        var option1 = $("<option>");
+                        option1.append(a[i].name);
+                        option1.val(a[i].name)
+                        $("#typename").append(option1);
+
+                    }
+                    var option1 = $("<option selected>");
+                    option1.append("请选择");
+                    option1.val("");
+                    $("#typename").append(option1);
+                })
+            }else{
+                $("#typename").empty();
+                var option1 = $("<option>");
+                option1.append("请选择");
+                option1.val("");
+                $("#typename").append(option1);
+            }
+        })
+    })
+</script>
 </head>
 
 <body class="content-pages-body">
@@ -16,28 +100,29 @@
 	  <h2>&gt;&gt; 配件库存流水账查询</h2>
 	</div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="commonTableSearch">
-       	<form id="form-search" name="form-search" action="" method="post">
+       	<form id="form-search" name="form-search" action="/bill/billList.do" method="post">
+            <input type="hidden" name="pageNum" id="pageNum" value="1">
         <tr>
             <th align="right">配件名称：</th>
-            <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" /></td>
+            <td><input name="partsname" type="text" class="inputTextNormal" id="partsname" value="${partsname}"/></td>
             <th align="right">出/入库：</th>
             <td>
-            	<select style="width:150px;">
-						<option value="">请选择</option>
+            	<select name="codename" id="codename" style="width:150px;">
+                      <option value="">请选择</option>
 				</select>
 			</td>
             <th align="right">出入库类型：</th>
             <td>
-            	<select style="width:150px;">
-						<option value="">请选择</option>
+            	<select name="typename" id="typename" style="width:150px;">
+                    <option value="" selected>请选择</option>
 				</select>
             </td>
             <th align="right">出入库日期：</th>
             <td>
-            	<input name="textfield2" type="text" class="inputTextNormal" id="textfield2" />
+            	<input name="billtime" type="text" class="inputTextNormal" id="billtime" value="${billtime}"/>
             </td>
             <th align="right">
-				<input type="button" class="btnShort" value="检索" />
+				<input type="submit" class="btnShort" value="检索" />
 			</th>
         </tr>
        	</form>
@@ -56,48 +141,22 @@
             <th>时间</th>
             <th>操作人</th>
         </tr>
-        <tr>
-            <td align="center">1</td>
-            <td align="center">出库</td>
-            <td align="center">订单出库</td>
-			<td align="center">滤清器</td>
-			<td align="center">30</td>
-			<td align="center">2017-10-20</td>
-			<td align="center">张飞</td>
-        </tr>
-        <tr>
-            <td align="center">2</td>
-            <td align="center">入库</td>
-            <td align="center">采购入库</td>
-			<td align="center">滤清器</td>
-			<td align="center">30</td>
-			<td align="center">2017-10-20</td>
-			<td align="center">张飞</td>
-        </tr>
-		<tr>
-            <td align="center">3</td>
-            <td align="center">出库</td>
-            <td align="center">订单出库</td>
-			<td align="center">滤清器</td>
-			<td align="center">30</td>
-			<td align="center">2017-10-20</td>
-			<td align="center">张飞</td>
-        </tr>        
+        <c:forEach var="b" items="${pageInfo.list}" varStatus="status">
+            <tr>
+                <td align="center">${status.count+(pageInfo.pageNum-1)*pageInfo.pageSize}</td>
+                <td align="center">${b.codename}</td>
+                <td align="center">${b.typename}</td>
+                <td align="center">${b.partsname}</td>
+                <td align="center">${b.billcount}</td>
+                <td align="center"><fmt:formatDate value="${b.billtime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+                <td align="center">${b.loginname}</td>
+            </tr>
+        </c:forEach>
+
         
   </table>
     <!--//commonTable-->
-    <div id="pagelist">
-    	<ul class="clearfix">
-        	<li><a href="#">首页</a></li>
-            <li ><a href="#">上页</a></li>
-            <li><a href="#">下页</a></li>
-            <li class="current"><input type="text" value="1" style="text-align:right" size="1"></li>
-            <li><a href="#">跳转</a></li>
-            <li><a href="#">尾页</a></li>
-            <li class="pageinfo">第1页</li>
-            <li class="pageinfo">共8页</li>
-        </ul>
-    </div>
+    <%@ include file="/WEB-INF/cmp/page.jsp"%>
 </div>
 <!--//content pages wrap-->
 </body>

@@ -1,6 +1,7 @@
 package com.huayu.service;
 
 import com.huayu.entity.Partsrepbill;
+import com.huayu.entity.PartsrepbillExample;
 import com.huayu.entity.Partsrepertory;
 import com.huayu.entity.PartsrepertoryExample;
 import com.huayu.mapper.PartsMapper;
@@ -27,9 +28,13 @@ public class BillService {
         List<Partsrepertory> p = mapper.selectByExample(example);
         if(partsrepbill.getBillflag().equals("out")){
             p.get(0).setPartsreqcount(count-partsrepbill.getBillcount());
-        }else{
+        }else if (partsrepbill.getBillflag().equals("in")){
             p.get(0).setPartsreqcount(count+partsrepbill.getBillcount());
         }
         mapper.updateByPrimaryKey(p.get(0));
+    }
+
+    public List<Partsrepbill> select_bill(Partsrepbill partsrepbill){
+        return dao.selectBypartsname(partsrepbill);
     }
 }

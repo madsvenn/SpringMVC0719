@@ -18,4 +18,11 @@ public class CodeService {
         example.createCriteria().andTypeEqualTo(code);
         return dao.selectByExample(example);
     }
+
+    public List<Code> selectByName(String name){
+        CodeExample example = new CodeExample();
+        example.createCriteria().andNameLike("%"+name+"%");
+        return dao.selectByExample(example);
+    }
+
 }

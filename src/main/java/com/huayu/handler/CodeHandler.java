@@ -56,6 +56,12 @@ public class CodeHandler {
                 }
             }return x;
         }).collect(Collectors.toList());
+    }
 
+    @RequestMapping("/getCodeByName.do")
+    @ResponseBody
+    public List<Code> getCodeByName(@RequestParam("codename") String name){
+        List<Code> list = service.selectByName(name);
+        return list.stream().filter(x->x.getName().length()>2).collect(Collectors.toList());
     }
 }

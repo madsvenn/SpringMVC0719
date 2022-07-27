@@ -50,7 +50,7 @@ public class OrderService {
         }
         System.out.println(flag);
         OrderExample example = new OrderExample();
-        example.createCriteria().andOrdercodeLike(code).andOrderdateEqualTo(date).andOrderflagEqualTo(flag);
+        example.createCriteria().andOrdercodeLike("%"+code+"%").andOrderdateEqualTo(date).andOrderflagEqualTo(flag);
         List<Order> list = orderDao.selectByExample(example);
         list.forEach(x->{
             for(Code y:codes){

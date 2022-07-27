@@ -242,4 +242,30 @@
       billuser = #{billuser,jdbcType=INTEGER}
     where billid = #{billid,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectBypartsname" parameterType="com.huayu.entity.Partsrepbill" resultMap="repertoryMap">
+    select billid,billflag,billtype,b.partsid,p.PartsName,billcount,billtime,billuser,u.LoginName,c.`name` codename, d.`name` typename from biz_partsrepbill b INNER JOIN biz_parts p on b.partsid = p.PartsId INNER JOIN sys_user u on b.billuser = u.UserId INNER JOIN sys_code c on b.billflag = c.`code` INNER JOIN sys_code d on b.billtype = d.`code`
+    <where>
+      <if test="partsname != ''">
+          partsname like '%${partsname}%'
+      </if>
+      <if test="codename != ''">
+        and c.`name` = #{codename}
+      </if>
+      <if test="typename != ''">
+        and d.`name` = #{typename}
+      </if>
+      <if test="billtime != null">
+        and DATE_FORMAT(billtime,'%Y-%m-%d') = DATE_FORMAT(#{billtime},'%Y-%m-%d')
+    </if>
+    </where>
+  </select>
+  <resultMap id="repertoryMap" type="com.huayu.entity.Partsrepbill" autoMapping="true">
+<!--    <association property="codename" column="codename"></association>-->
+<!--    <association property="typename" column="typename"></association>-->
+    <association property="partsname" column="partsname">
+      <result property="partsname" column="partsname"></result>
+    </association>
+<!--    <association property="loginname" column="loginName"></association>-->
+  </resultMap>
 </mapper>
