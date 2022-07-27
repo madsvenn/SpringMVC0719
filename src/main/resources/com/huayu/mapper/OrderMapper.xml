@@ -100,7 +100,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.huayu.entity.Order">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="orderid" parameterType="com.huayu.entity.Order">
     insert into biz_order (OrderId, OrderCode, OrderDate, 
       OrderFlag)
     values (#{orderid,jdbcType=INTEGER}, #{ordercode,jdbcType=VARCHAR}, #{orderdate,jdbcType=DATE}, 

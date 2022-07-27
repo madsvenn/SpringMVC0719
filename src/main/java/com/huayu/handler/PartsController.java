@@ -144,9 +144,12 @@ public class PartsController {
 
     @Transactional
     @RequestMapping("/partsDelete.do")
-    public String partsDelete(@RequestParam("partsid")Integer id){
+    public String partsDelete(@RequestParam("partsid")Integer id,
+                              @RequestParam("pageNum")Integer pageNum,
+                              Map<String,Object> map){
         service.deleteById(id);
-        return "redirect:/parts/partsList.do";
+        map.put("pageNum",pageNum);
+        return "forward:/parts/partsList.do";
     }
 
     @RequestMapping("/partsRepertory.do")

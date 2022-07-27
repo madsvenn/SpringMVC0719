@@ -34,6 +34,11 @@ public class PartsService {
         return partsMapper.selectByExample(example);
     }
 
+    public List<Partsrepertory> selectByPartsId(Integer partsid){
+        PartsrepertoryExample example = new PartsrepertoryExample();
+        example.createCriteria().andPartsidEqualTo(partsid);
+        return partsrepertoryMapper.selectByExample(example);
+    }
     public List<Parts> selectByKey(String key) {
 
         PartsExample example = new PartsExample();

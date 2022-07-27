@@ -83,7 +83,7 @@
 				<td width="10%" align="right" class="title"><span class="required">*</span>出/入库类型：</td>
 				<td width="15%" align="left">
 					<select id="billtype" name="billtype" style="width:150px;">
-						<option>请选择</option>
+						<option value="">请选择</option>
 					</select>
 				</td>
 

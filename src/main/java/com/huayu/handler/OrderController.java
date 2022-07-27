@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/order")
@@ -31,6 +28,7 @@ public class OrderController {
     @Autowired
     PartsService partsService;
 
+    @Deprecated
     @RequestMapping("/list.do")
     public String orderList(Map<String ,Object>map){
         List<Order> list = orderService.selectAll();
@@ -39,16 +37,20 @@ public class OrderController {
     }
 
     @RequestMapping("/searcher.do")
-    public String orderSearcher(@RequestParam("textfield")String code,
-                                @RequestParam("textfield2") Date date,
-                                @RequestParam("datepiker2") String flag,
+    public String orderSearcher(@RequestParam(value = "textfield",defaultValue = "")String code,
+                                @RequestParam(value = "textfield2",defaultValue = "") Date date,
+                                @RequestParam(value = "datepiker2",defaultValue = "") String flag,
+                                @RequestParam(value = "pageNum" ,defaultValue = "1")Integer pageNum,
                                 Map<String,Object>map){
 
+        PageHelper.startPage(pageNum,10);
         List<Order> list = orderService.selectByParam(code, date, flag);
+        PageInfo<Order> pageInfo = new PageInfo<>(list);
         map.put("textfield",code);
         map.put("textfield2",date);
         map.put("datepiker2",flag);
         map.put("list",list);
+        map.put("pageInfo",pageInfo);
         return "/static/pages/ordersys/order/orderlist";
     }
 
@@ -78,14 +80,29 @@ public class OrderController {
         return "static/pages/ordersys/order/getParts";
     }
 
-    @Transactional
-    @RequestMapping("/save")
+
+    @RequestMapping("/save.do")
     @ResponseBody
     public Message savePost(@SessionAttribute("user")User user,
                             Order order){
-        System.out.println(order.getPartsid());
-        System.out.println(order.getOrderpartscount());
+        System.out.println(Arrays.toString(order.getPartsid()));
+        System.out.println(Arrays.toString(order.getOrderpartscount()));
 
-        return new Message(200,"GOOD");
+        try {
+            orderService.insertOrder(order,user);
+            return new Message(200,"GOOD");
+        }catch (Exception e){
+            return new Message(500,"库存不足");
+        }
+
+    }
+
+    @RequestMapping("/delete.do")
+    public String OrderDelete(@RequestParam("orderid")Integer orderid,
+                              @RequestParam("pageNum")Integer pageNum,
+                              Map<String,Object> map){
+        orderService.orderDelete(orderid);
+        map.put("pageNum",pageNum);
+        return "forward:/order/searcher.do";
     }
 }

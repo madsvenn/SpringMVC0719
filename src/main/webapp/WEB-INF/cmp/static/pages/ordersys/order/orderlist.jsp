@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -19,11 +19,12 @@
     </div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="commonTableSearch">
         <form id="form-search" name="form-search" action="/order/searcher.do" method="post">
+            <input name="pageNum" value="1" id="pageNum" type="hidden">
             <tr>
                 <th align="right">订单编码：</th>
                 <td><input name="textfield" type="text" value="${textfield}" class="inputTextNormal" id="textfield1" /></td>
                 <th align="right">订单保存时间：</th>
-                <td><input name="textfield2" type="text" value="${textfield2}" class="inputTextNormal" id="textfield2" /></td>
+                <td><input name="textfield2" type="text" value="<fmt:formatDate value="${textfield2}" pattern="yyyy-MM-dd"/>" class="inputTextNormal" id="textfield2" /></td>
                 <td align="right">订单状态：</td>
                 <td><input name="datepiker2" type="text" value="${datepiker2}" class="inputTextNormal" id="datepiker3" /></td>
 
@@ -52,7 +53,7 @@
             <th>订单状态</th>
             <th class="editColDefault">操作</th>
         </tr>
-        <c:forEach var="o" items="${list}" varStatus="status">
+        <c:forEach var="o" items="${pageInfo.list}" varStatus="status">
             <tr>
                 <td align="center">${o.orderid}</td>
                 <td align="center">${o.ordercode}</td>
@@ -61,25 +62,14 @@
                 <td align="center">
                     <a href="order-view.html" class="btnIconView" title="查看详情"></a>
                     <a href="/order/edit.do?orderid=${o.orderid}" class="btnIconEdit" title="更新"></a>
-                    <a href="#" class="btnIconDel" title="删除"></a>
+                    <a href="/order/delete.do?orderid=${o.orderid}&pageNum=${pageInfo.pageNum}" class="btnIconDel" title="删除"></a>
                 </td>
             </tr>
         </c:forEach>
 
     </table>
     <!--//commonTable-->
-    <div id="pagelist">
-        <ul class="clearfix">
-            <li><a href="#">首页</a></li>
-            <li ><a href="#">上页</a></li>
-            <li><a href="#">下页</a></li>
-            <li class="current"><input type="text" value="1" style="text-align:right" size="1"></li>
-            <li><a href="#">跳转</a></li>
-            <li><a href="#">尾页</a></li>
-            <li class="pageinfo">第1页</li>
-            <li class="pageinfo">共8页</li>
-        </ul>
-    </div>
+    <%@include file="/WEB-INF/cmp/page.jsp"%>
 </div>
 <!--//content pages wrap-->
 </body>

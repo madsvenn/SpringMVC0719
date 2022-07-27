@@ -59,7 +59,7 @@
             <td align="center">
             	
             	<a href="/parts/partsEdit.do?partsid=${p.partsid}" class="btnIconEdit" title="更新"></a>
-                <a href="/parts/partsDelete.do?partsid=${p.partsid}" class="btnIconDel" title="删除"></a>
+                <a href="/parts/partsDelete.do?partsid=${p.partsid}&pageNum=${pageInfo.pageNum}" class="btnIconDel" title="删除"></a>
             </td>
         </tr>
         </c:forEach>

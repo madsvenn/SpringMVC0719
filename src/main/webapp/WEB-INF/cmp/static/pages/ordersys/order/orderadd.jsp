@@ -1,5 +1,7 @@
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,18 +33,21 @@
 		
 		$("#btn_save").click(function(){
 			// $("#coursesCreat").submit();
-			alert($("#coursesCreat").serializeArray())
 			var json = formatArray($("#coursesCreat").serializeArray(),'object')
-			alert(json)
-			alert(typeof json)
-			$.post("/order/save.do",JSON.stringify(json),function(a){
+			// alert(JSON.stringify(json)) //这种方法只能转成json格式的string字符串
+			$.post("/order/save.do", json, function(a){
 				if(a.code==200){
-					window.open("/order/list.do")
+					window.open("/order/searcher.do","_self")
 				}else if(a.code==500){
 					alert(a.message);
 				}
-			})
-		});
+			},"json")
+		})
+
+		$("#btn_submit").click(function(){
+			$("#orderflag").val("2");
+			$("#btn_save").click();
+		})
 		
 		$("#apply_selectedParts").click(function(){
 			var parts=$(".selectiveParts:checked");
@@ -65,14 +70,17 @@
 					$("#attachmentList").append(tr);
 				}				
 
-			}); 
+			});
+			$("#selectedPartsDiv").fadeOut();
 		});
 		
 	});
 
 </script>
 </head>
+<% Date date = new Date();
 
+%>
 <body class="content-pages-body">
 <div class="content-pages-wrap">
     <div class="commonTitle">
@@ -84,7 +92,7 @@
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单编码：</td>
 				<td width="15%" align="left"><input type="text" name="ordercode" style="width:150px"></td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单保存日期：</td>
-				<td width="15%" align="left">2011-10-30</td>
+				<td width="15%" align="left"><fmt:formatDate value="<%=date%>" pattern="yyyy-MM-dd"/></td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单状态：</td>
 				<td width="15%" align="left">
 					<select id="orderflag" name="orderflag">
@@ -112,7 +120,7 @@
     <div id="formPageButton">
     	<ul>
 			<li><a href="javascript:void(0)" title="保存" class="btnShort" id="btn_save">保存</a></li>
-			<li><a href="#" title="提交" class="btnShort">提交</a></li>
+			<li><a href="javascript:void(0)" title="提交" class="btnShort" id="btn_submit">提交</a></li>
         	<li><a href="javascript:window.history.go(-1)" title="返回" class="btnShort">返回</a></li>
         </ul>
     </div>
