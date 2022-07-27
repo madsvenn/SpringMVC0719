@@ -1,21 +1,18 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="gbk" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title>物资采购与产品整合管理系统</title>
-<link href="/css/main.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.contextPath }/css/main.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" language="javascript">
 function showMaterials(){
 	var date = new Date();
 	var time = date.getTime();
 	var obj = new Array('INSERT');
 	//时间戳
-	var url = "/cmp/static/pages/ordersys/order/getmater";
+	var url = "${pageContext.request.contextPath }/page/ordersys/order/getmater.jsp";
 	var resultValue = window.showModalDialog(url,obj,'dialogWidth:800px;dialogHeight:400px');
 
 	//获取已经存在明细中的原料ID集合
@@ -90,55 +87,17 @@ function deleteRow(tableID,t){
 		  <table border="0" cellspacing="1" cellpadding="0" class="commonTable">
 			  <tr>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单序号：</td>
-				<td width="15%" align="left">${order.orderid}</td>
+				<td width="15%" align="left">1</td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单编码：</td>
-				<td width="15%" align="left">${order.ordercode}</td>
+				<td width="15%" align="left">DD2011103001</td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单保存日期：</td>
-				<td width="15%" align="left"><fmt:formatDate value="${order.orderdate}" pattern="yyyy-MM-dd" /></td>
+				<td width="15%" align="left">2011-10-30</td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单状态：</td>
 				<td width="15%" align="left">
-					<select name="orderflage">
-						<c:choose>
-							<c:when test="${order.orderflag=='0'}">
-								<option value="0" selected>新订单</option>
-							</c:when>
-							<c:otherwise>
-								<option value="0">新订单</option>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${order.orderflag=='1'}">
-								<option value="1" selected>未提交</option>
-							</c:when>
-							<c:otherwise>
-								<option value="1">未提交</option>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${order.orderflag=='2'}">
-								<option value="2" selected>待审核</option>
-							</c:when>
-							<c:otherwise>
-								<option value="2">待审核</option>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${order.orderflag=='3'}">
-								<option value="3" selected>已提交</option>
-							</c:when>
-							<c:otherwise>
-								<option value="3">已提交</option>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${order.orderflag=='4'}">
-								<option value="4" selected>不通过</option>
-							</c:when>
-							<c:otherwise>
-								<option value="4">不通过</option>
-							</c:otherwise>
-						</c:choose>
-
+					<select id="orderstatus">
+						<option value="0" selected>未提交</option>
+						<option value="1">待审核</option>
+						<option value="2">已提交</option>
 					</select>
 				</td>
 			  </tr>
@@ -170,4 +129,3 @@ function deleteRow(tableID,t){
 <!--//content pages wrap-->
 </body>
 </html>
-

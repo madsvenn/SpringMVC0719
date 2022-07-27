@@ -1,79 +1,62 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="gbk" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title>物资采购与产品整合管理系统</title>
-<link href="/css/main.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.contextPath }/css/main.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src='<c:url value="/js/jquery-1.11.1.js"></c:url>'></script>
 <script type="text/javascript" language="javascript">
-function showMaterials(){
-	var date = new Date();
-	var time = date.getTime();
-	var obj = new Array('INSERT');
-	//时间戳
-	var url = "/cmp/static/pages/ordersys/order/getmater";
-	var resultValue = window.showModalDialog(url,obj,'dialogWidth:800px;dialogHeight:400px');
 
-	//获取已经存在明细中的原料ID集合
-	var materIds = document.getElementsByName('materId');
-	if(resultValue!=null && resultValue!=undefined){
-		for(var i=0;i<resultValue.length;i++){
-			var tempAry = resultValue[i].split(',');
-			var flag = false;
-			//判断列表中是否已经选择了某种原料
-			for(var j=0;j<materIds.length;j++){
-				if(tempAry[0]==materIds[j].value){
-					flag = true;
-				}
-			}
-			if(!flag){
-				insertMaterialMsg(tempAry);
-			}
-			
-		}
+	$(function(){
+		$("#btn_openParts").click(function(){
+			//加载选择配件
+			$("#nestedDiv").load("selectParts.do");
+			$("#selectedPartsDiv").fadeIn();
+		});
 		
-	}
-}
+		//关闭窗口
+		$("#close_selectedParts").click(function(){
+			$("#apply_selectedParts").click();
+			$("#selectedPartsDiv").fadeOut();
+		});
+		
+		$("#btn_search").click(function(){
+			$("#nestedDiv").load("selectParts.do",{partsName:$("#partsName").val()});
+		});
+		
+		
+		$("#btn_save").click(function(){
+			$("#coursesCreat").submit();
+		});
+		
+		$("#apply_selectedParts").click(function(){
+			var parts=$(".selectiveParts:checked");
+			
+			parts.each(function(){			
+				var data=$(this).val().split(",");
+				
+				var p=$(".txt_partsid[value='"+data[0]+"']");
+				if(p.size()==0){
+					var tr=$("<tr>");
+					tr.append($("<input type='hidden' name='partsid' class='txt_partsid'/>").val(data[0]));
+					tr.append($("<td>").text(data[1]));
+					tr.append($("<td>").append("<input type='text' name='orderpartscount' class='orderParts'/>"));
+					tr.append($("<td>").text(data[2]));
+					var btn_delete=$("<input type='button' value='删除'/>");
+					btn_delete.click(function(){
+						alert($(this).parent().parent().remove());
+					});
+					tr.append($("<td>").append(btn_delete));
+					$("#attachmentList").append(tr);
+				}				
 
-
-function insertMaterialMsg(tempAry){
-	//原料名ID
-	var id = tempAry[0];
-	//原料名称
-	var materName = tempAry[1];
-	//原料库存
-	var storage = tempAry[2];
-	
-	var trObj = attachmentList.insertRow();
-	trObj.setAttribute("align","center");
-
-	var tdObj = trObj.insertCell();
-	tdObj.setAttribute("align","left");
-	tdObj.innerHTML = "<input type='hidden' name='materId' value='"+id+"'>"+materName;
-	
-	var tdObj = trObj.insertCell();
-	tdObj.innerHTML = "<input type='text' name='count' value='' class='inputTextNormal'>";
-	
-	var tdObj = trObj.insertCell();
-	tdObj.setAttribute("align","left");
-	tdObj.innerHTML = storage;
-	
-	var tdObj = trObj.insertCell();
-	tdObj.setAttribute("align","left");
-	tdObj.innerHTML = "<button onclick=\"deleteRow('attachmentList',this);\" class=\"btnIconDel\" title=\"删除\" value=\"删除\"></button>";
-}
-
-
-//删除行
-function deleteRow(tableID,t){
-	var tIndex = t.parentNode.parentNode.rowIndex;
-		if(confirm('确定要执行此操作吗?')) {
-			 t.parentNode.parentNode.parentNode.deleteRow(tIndex);
-		}
-		return false; 		
-
-}
+			}); 
+		});
+		
+	});
 
 </script>
 </head>
@@ -83,25 +66,25 @@ function deleteRow(tableID,t){
     <div class="commonTitle">
         <h2>&gt;&gt; 订单信息修改</h2>
   </div>
-        <form id="coursesCreat" name="coursesCreat" action="" method="post">
-		  <table border="0" cellspacing="1" cellpadding="0" class="commonTable">
+        <form id="coursesCreat" name="coursesCreat" action="makeOrder.do" method="post">
+		  <table border="0" cellspacing="1" cellpadding="0" class="commonTable" >
 			  <tr>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单编码：</td>
-				<td width="15%" align="left"><input type="text" style="width:150px"></td>
+				<td width="15%" align="left"><input type="text" name="ordercode" style="width:150px"></td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单保存日期：</td>
 				<td width="15%" align="left">2011-10-30</td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单状态：</td>
 				<td width="15%" align="left">
-					<select id="orderstatus">
-						<option value="0" selected>未提交</option>
-						<option value="1">待审核</option>
+					<select id="orderflag" name="orderflag">
+						<option value="1" selected>未提交</option>
+						<option value="2">待审核</option>
 					</select>
 				</td>
 			  </tr>
 
 		 </table>
 	    <div align="left" style="margin-top:15px;margin-bottom:5px">
-	    	<a href="javascript:showMaterials();" title="选择原料" class="btnShort">选择配件</a>
+	    	<a href="javascript:void(0);" id="btn_openParts" title="选择原料" class="btnShort">选择配件</a>
 	    </div>
 		<table width="90%" border="0" cellpadding="0" cellspacing="1" id="attachmentList" class="commonTable marginTopM">
 		  <tr>
@@ -116,12 +99,48 @@ function deleteRow(tableID,t){
     <!--//commonTable-->
     <div id="formPageButton">
     	<ul>
-			<li><a href="#" title="保存" class="btnShort">保存</a></li>
+			<li><a href="javascript:void(0)" title="保存" class="btnShort" id="btn_save">保存</a></li>
 			<li><a href="#" title="提交" class="btnShort">提交</a></li>
         	<li><a href="javascript:window.history.go(-1)" title="返回" class="btnShort">返回</a></li>
         </ul>
     </div>
     <!--//commonToolBar-->
+    
+<!-- 内置开始 -->
+<div id="selectedPartsDiv" style="display:none;width:800px;height: 400px;background-color: silver;position: absolute;top: 100px;left: 100px">
+	
+
+<div class="content-pages-wrap">
+	<div class="commonTitle">
+	  <h2>&gt;&gt; 订单管理&nbsp;&gt;&gt;&nbsp;配件选择列表</h2>
+	</div>
+	<!-- <form id="form-search" name="form-search"  method="post"> -->
+	    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="commonTableSearch">
+	        <tr>
+	            <th align="right">配件名称：</th>
+	            <td ><input name="partsName" type="text" class="inputTextNormal" id="partsName" value="${params.partsName }"/></td>
+				<td width="150" align="left" >
+					<button id="btn_search">检索</button>
+				</td>
+				<td align="right">
+					
+				</td>
+	        </tr>
+    	</table>
+    <!-- </form> -->
+    <!--//commonTableSearch-->
+    <div class="btnBar">
+    	<ul class="clearfix">
+        	<li><a href="javascript:void(0);" title="确定" class="btnLong" id="apply_selectedParts">确定</a></li>
+        	<li><a href="javascript:void(0);" title="关闭" id="close_selectedParts" class="btnLong">关闭</a></li>
+        </ul>
+    </div>
+    <div id="nestedDiv">
+
+    </div>
+
+</div>
+
 </div>
 <!--//content pages wrap-->
 </body>
