@@ -27,6 +27,8 @@ public class BillService {
         example.createCriteria().andPartsidEqualTo(partsrepbill.getPartsid());
         List<Partsrepertory> p = mapper.selectByExample(example);
         if(partsrepbill.getBillflag().equals("out")){
+            if(count<partsrepbill.getBillcount())
+                throw new RuntimeException("库存不足，出库失败");
             p.get(0).setPartsreqcount(count-partsrepbill.getBillcount());
         }else if (partsrepbill.getBillflag().equals("in")){
             p.get(0).setPartsreqcount(count+partsrepbill.getBillcount());
@@ -37,4 +39,6 @@ public class BillService {
     public List<Partsrepbill> select_bill(Partsrepbill partsrepbill){
         return dao.selectBypartsname(partsrepbill);
     }
+
+
 }

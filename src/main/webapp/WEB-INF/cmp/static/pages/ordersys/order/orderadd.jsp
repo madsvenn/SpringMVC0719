@@ -7,13 +7,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title>物资采购与产品整合管理系统</title>
 <link href="${pageContext.request.contextPath }/css/main.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src='<c:url value="/js/jquery-1.11.1.js"></c:url>'></script>
+<script type="text/javascript" src='<c:url value="/js/jquery-1.4.2.min.js"></c:url>'></script>
+<script src="/js/json.js"></script>
 <script type="text/javascript" language="javascript">
 
 	$(function(){
 		$("#btn_openParts").click(function(){
 			//加载选择配件
-			$("#nestedDiv").load("selectParts.do");
+			$("#nestedDiv").load("/order/selectParts.do");
 			$("#selectedPartsDiv").fadeIn();
 		});
 		
@@ -24,12 +25,23 @@
 		});
 		
 		$("#btn_search").click(function(){
-			$("#nestedDiv").load("selectParts.do",{partsName:$("#partsName").val()});
+			$("#nestedDiv").load("/order/selectParts.do",{partsName:$("#partsName").val()});
 		});
 		
 		
 		$("#btn_save").click(function(){
-			$("#coursesCreat").submit();
+			// $("#coursesCreat").submit();
+			alert($("#coursesCreat").serializeArray())
+			var json = formatArray($("#coursesCreat").serializeArray(),'object')
+			alert(json)
+			alert(typeof json)
+			$.post("/order/save.do",JSON.stringify(json),function(a){
+				if(a.code==200){
+					window.open("/order/list.do")
+				}else if(a.code==500){
+					alert(a.message);
+				}
+			})
 		});
 		
 		$("#apply_selectedParts").click(function(){

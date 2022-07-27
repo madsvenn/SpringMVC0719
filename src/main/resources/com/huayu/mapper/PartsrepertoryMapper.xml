@@ -180,4 +180,15 @@
       PartsReqCount = #{partsreqcount,jdbcType=INTEGER}
     where PartsRepId = #{partsrepid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectRepertoryByExamole" resultType="map" parameterType="com.huayu.entity.PartsrepertoryExample">
+    select biz_parts.PartsId,partsName,PartsReqCount from biz_parts join biz_partsrepertory
+                                                                         on biz_parts.PartsId=biz_partsrepertory.PartsId
+    <if test="_parameter != null">
+        <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
 </mapper>

@@ -2,6 +2,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.huayu.entity.*;
 import com.huayu.mapper.PartsMapper;
+import com.huayu.mapper.PartsrepertoryMapper;
 import com.huayu.service.BillService;
 import com.huayu.service.OrderService;
 import com.huayu.service.PartsService;
@@ -16,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class UserTest {
 
@@ -111,5 +113,16 @@ public class UserTest {
     @Test
     public void orderselect_id(){
         System.out.println(orderService.selectById(1));
+    }
+
+
+    @Test
+    public void billselect_id(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("SpringConfig.xml");
+        PartsrepertoryMapper mapper = context.getBean(PartsrepertoryMapper.class);
+        PartsrepertoryExample example = new PartsrepertoryExample();
+        List<Map<String,Object>> list = mapper.selectRepertoryByExamole(example);
+//        List<>
+        list.forEach(x-> System.out.println(x.get("partsName")));
     }
 }

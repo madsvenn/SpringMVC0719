@@ -114,6 +114,12 @@ public class PartsrepertoryExample {
             return (Criteria) this;
         }
 
+        //增加的配置名称的模糊查询
+        public Criteria andPartsNameLike(String value) {
+            addCriterion("biz_parts.partsName like", value, "partsName");
+            return (Criteria) this;
+        }
+
         public Criteria andPartsrepidEqualTo(Integer value) {
             addCriterion("PartsRepId =", value, "partsrepid");
             return (Criteria) this;

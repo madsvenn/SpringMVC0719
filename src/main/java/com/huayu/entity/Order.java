@@ -14,6 +14,10 @@ public class Order {
 
     private String orderflag;
 
+    private Integer[] partsid;
+
+    private Integer[] orderpartscount;
+
     public Order(Integer orderid, String ordercode, Date orderdate, String orderflag) {
         this.orderid = orderid;
         this.ordercode = ordercode;

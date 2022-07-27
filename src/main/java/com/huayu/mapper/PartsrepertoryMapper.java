@@ -3,6 +3,8 @@ package com.huayu.mapper;
 import com.huayu.entity.Partsrepertory;
 import com.huayu.entity.PartsrepertoryExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +31,6 @@ public interface PartsrepertoryMapper {
     int updateByPrimaryKeySelective(Partsrepertory row);
 
     int updateByPrimaryKey(Partsrepertory row);
+
+    List<Map<String,Object>> selectRepertoryByExamole(PartsrepertoryExample example);
 }

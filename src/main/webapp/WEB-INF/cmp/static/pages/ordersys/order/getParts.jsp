@@ -22,7 +22,7 @@
 		            <td align="center">滤清器</td>
 		            <td align="center">50</td>
 		        </tr> -->
-		        <c:forEach items="${pageInfo.list }" var="p">
+		        <c:forEach items="${pageInfo.list}" var="p">
 		              <tr>
 		            <td align="center" style="width:5%">
 		            	<input type="checkbox"   name="id" class="selectiveParts" value="${p.PartsId},${p.partsName},${p.PartsReqCount}">
@@ -57,7 +57,7 @@
 					return;
 				}
 				$("#hidden_sub_pageNum").val($(this).attr("value"));
-				$("#nestedDiv").load("selectParts.do",{pageNum:$(this).attr("value"),partsName:'${params.partsName}'});
+				$("#nestedDiv").load("/order/selectParts.do",{pageNum:$(this).attr("value"),partsName:'${params.partsName}'});
 			});
 			
 			$("#link_gotoSomePage").click(function(){

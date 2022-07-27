@@ -12,25 +12,26 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class PartsService {
 
     @Autowired
-    PartsMapper dao;
+    PartsMapper partsMapper;
 
     @Autowired
-    PartsrepertoryMapper mapper;
+    PartsrepertoryMapper partsrepertoryMapper;
 
     public void insert(Parts parts) {
-        dao.insert(parts);
+        partsMapper.insert(parts);
     }
 
     @Deprecated
     public List<Parts> selectAll() {
         PartsExample example = new PartsExample();
-        return dao.selectByExample(example);
+        return partsMapper.selectByExample(example);
     }
 
     public List<Parts> selectByKey(String key) {
@@ -39,27 +40,26 @@ public class PartsService {
         if (key != null && !key.trim().equals("")) {
             example.createCriteria().andPartsnameLike("%" + key + "%");
         }
-        return dao.selectByExample(example);
+        return partsMapper.selectByExample(example);
     }
 
     public Parts selectById(Integer id) {
 
-        return dao.selectByPrimaryKey(id);
+        return partsMapper.selectByPrimaryKey(id);
     }
 
     public void updateByPojo(Parts parts) {
-        dao.updateByPrimaryKey(parts);
+        partsMapper.updateByPrimaryKey(parts);
     }
 
     public void deleteById(Integer id) {
-        dao.deleteByPrimaryKey(id);
+        partsMapper.deleteByPrimaryKey(id);
     }
 
     /**
      *
      * @return 库存查询，将name改变
      */
-
     public List<Partsrepertory> selectRepertory(Integer id){
 
 
@@ -69,7 +69,20 @@ public class PartsService {
             example.createCriteria().andPartsidEqualTo(id);
         }
 
-        return mapper.selectByExample(example);
+        return partsrepertoryMapper.selectByExample(example);
+    }
+
+    public List<Map<String,Object>> selectRepertoryName(String partsName,Integer partsid){
+
+        PartsrepertoryExample example = new PartsrepertoryExample();
+        PartsrepertoryExample.Criteria c=example.createCriteria();
+        if (partsName != null && !partsName.trim().equals("")){
+            c.andPartsNameLike("%"+partsName+"%");
+        }
+        if (partsid != null && !partsid.equals("")){
+            c.andPartsidEqualTo(partsid);
+        }
+        return partsrepertoryMapper.selectRepertoryByExamole(example);
     }
 
 }
